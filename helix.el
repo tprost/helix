@@ -29,8 +29,9 @@
 (require 'helix-core)
 (require 'helix-helpers)
 ;; (require 'helix-util)
+(require 'helix-match)
 
-
+(require 'helix-states)
 
 (require 'expand-region)
 (require 'multiple-cursors)

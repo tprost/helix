@@ -83,12 +83,12 @@
   "Insert state cursor."
   :group 'helix)
 
-(defface helix-motion-cursor
+(defface helix-view-cursor
   '((((class color) (background dark))
      (:inherit cursor))
     (((class color) (background light))
      (:inherit cursor)))
-  "Motion state cursor."
+  "View state cursor."
   :group 'helix)
 
 (defface helix-keypad-cursor

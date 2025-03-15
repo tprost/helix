@@ -34,7 +34,7 @@ This can be thought of as an inverse to `mc/mark-all-in-region'."
 
 (defun helix-select-regex ()
   (interactive)
-  (warn "unimplemented")
+  (warn "unimplemented"))
 
 ;; (defun helix-split-selection-on-newline ())
 ;; (defun helix-merge-selections ())

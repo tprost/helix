@@ -237,7 +237,7 @@ probably start in normal mode, otherwise we start in motion."
       (helix--switch-state state t)
       (if any-self-insert
           'normal
-        'motion))))
+        'view))))
 
 (defun helix--mode-get-state (&optional mode)
   "Get initial state for MODE or current major mode if and only if

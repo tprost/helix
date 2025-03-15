@@ -11,21 +11,15 @@
 (define-key helix-normal-state-keymap (kbd "9") 'digit-argument)
 (define-key helix-normal-state-keymap (kbd "0") 'digit-argument)
 
-;; ;; movement
+;; movement
 (define-key helix-normal-state-keymap (kbd "k") 'previous-line)
 (define-key helix-normal-state-keymap (kbd "j") 'next-line)
 (define-key helix-normal-state-keymap (kbd "l") 'forward-char)
 (define-key helix-normal-state-keymap (kbd "h") 'backward-char)
-
-;; ;; insert mode
-
-
-(define-key helix-normal-state-keymap (kbd "i") 'helix-insert)
-(define-key helix-normal-state-keymap (kbd "a") 'helix-append)
-
-(define-key helix-insert-state-keymap (kbd "<escape>") 'helix-normal-mode)
-
-;; ;; word motions
+(define-key helix-view-state-keymap (kbd "k") 'previous-line)
+(define-key helix-view-state-keymap (kbd "j") 'next-line)
+(define-key helix-view-state-keymap (kbd "l") 'forward-char)
+(define-key helix-view-state-keymap (kbd "h") 'backward-char)
 (define-key helix-normal-state-keymap (kbd "e") 'helix-move-next-word-end)
 (define-key helix-normal-state-keymap (kbd "E") 'helix-move-next-long-word-end)
 (define-key helix-normal-state-keymap (kbd "b") 'helix-move-previous-word-start)
@@ -37,13 +31,34 @@
 (define-key helix-normal-state-keymap (kbd "F") 'helix-find-previous-char)
 (define-key helix-normal-state-keymap (kbd "T") 'helix-find-till-previous-char)
 (define-key helix-normal-state-keymap (kbd "G") 'goto-line)
+(define-key helix-view-state-keymap (kbd "e") 'helix-move-next-word-end)
+(define-key helix-view-state-keymap (kbd "E") 'helix-move-next-long-word-end)
+(define-key helix-view-state-keymap (kbd "b") 'helix-move-previous-word-start)
+(define-key helix-view-state-keymap (kbd "B") 'helix-move-previous-long-word-start)
+(define-key helix-view-state-keymap (kbd "w") 'helix-move-next-word-start)
+(define-key helix-view-state-keymap (kbd "W") 'helix-move-next-long-word-start)
+(define-key helix-view-state-keymap (kbd "f") 'helix-find-char)
+(define-key helix-view-state-keymap (kbd "t") 'helix-find-till-char)
+(define-key helix-view-state-keymap (kbd "F") 'helix-find-previous-char)
+(define-key helix-view-state-keymap (kbd "T") 'helix-find-till-previous-char)
+(define-key helix-view-state-keymap (kbd "G") 'goto-line)
+
+;; ;; insert mode
+(define-key helix-normal-state-keymap (kbd "i") 'helix-insert)
+(define-key helix-normal-state-keymap (kbd "a") 'helix-append)
+(define-key helix-normal-state-keymap (kbd "c") 'helix-change)
+(define-key helix-normal-state-keymap (kbd "o") 'helix-open-below)
+(define-key helix-normal-state-keymap (kbd "O") 'helix-open-above)
+
+(define-key helix-insert-state-keymap (kbd "<escape>") 'helix-normal-mode)
+
+
 
 (define-key helix-normal-state-keymap (kbd "\"") 'helix-select-register)
 (define-key helix-normal-state-keymap (kbd "q")  'helix-start-stop-kmacro-to-register)
 (define-key helix-normal-state-keymap (kbd "Q")  'helix-call-kmacro-from-register)
 
 
-(define-key helix-normal-state-keymap (kbd "x") 'helix-extend-line-below)
 (define-key helix-normal-state-keymap (kbd "d") 'helix-delete-region-or-char)
 (define-key helix-normal-state-keymap (kbd "p") 'yank)
 (define-key helix-normal-state-keymap (kbd "y") 'helix-kill-ring-save)
@@ -52,13 +67,10 @@
 ;; ;; (helix-define-key 'normal 'global (kbd "q")   'helix-toggle-kmacro-recording)
 ;; ;; (helix-define-key 'normal 'global (kbd "Q")   'kmacro-call-macro)
 (define-key helix-normal-state-keymap (kbd ";") 'helix-collapse-region)
-(define-key helix-normal-state-keymap (kbd "f") 'helix-find-char)
-(define-key helix-normal-state-keymap (kbd "c") 'helix-change)
-(define-key helix-normal-state-keymap (kbd "o") 'helix-open-below)
-(define-key helix-normal-state-keymap (kbd "O") 'helix-open-above)
 
-(define-key helix-normal-state-keymap (kbd "s") 'mc/mark-all-in-region)
-(define-key helix-normal-state-keymap (kbd "S") 'todo)
+(define-key helix-normal-state-keymap (kbd "x") 'helix-extend-line-below)
+(define-key helix-normal-state-keymap (kbd "s") 'mc/mark-all-in-region-regexp)
+(define-key helix-normal-state-keymap (kbd "S") 'helix-split-selection)
 (define-key helix-normal-state-keymap (kbd "_") 'todo)
 (define-key helix-normal-state-keymap (kbd ";") 'todo)
 (define-key helix-normal-state-keymap (kbd ",") 'todo)
@@ -80,7 +92,16 @@
 ;; ;; (helix-define-key 'normal 'global (kbd "M-x") 'execute-extended-command)
 (define-key helix-normal-state-keymap (kbd "%") 'mark-whole-buffer)
 
-(define-prefix-command 'helix-goto-prefix-command)
+
+(define-prefix-command 'helix-match-prefix-command)
+(define-key helix-normal-state-keymap (kbd "m") 'helix-match-prefix-command)
+(define-key 'helix-match-prefix-command (kbd "s") 'helix-surround-add)
+(define-key 'helix-match-prefix-command (kbd "r") 'helix-surround-replace)
+(define-key 'helix-match-prefix-command (kbd "d") 'helix-surround-delete)
+(define-key 'helix-match-prefix-command (kbd "a") 'er/mark-outside-pairs)
+(define-key 'helix-match-prefix-command (kbd "i") 'er/mark-inside-pairs)
+
+(define-prefix-commnd 'helix-goto-prefix-commnd)
 (define-key 'helix-goto-prefix-command (kbd "g") 'beginning-of-buffer)
 (define-key 'helix-goto-prefix-command (kbd "e") 'end-of-buffer)
 (define-key 'helix-goto-prefix-command (kbd "s") 'beginning-of-line-text)
@@ -89,10 +110,11 @@
 (define-key 'helix-goto-prefix-command (kbd "n") 'next-buffer)
 (define-key 'helix-goto-prefix-command (kbd "p") 'previous-buffer)
 (define-key 'helix-goto-prefix-command (kbd ".") 'goto-last-change)
-(define-key 'helix-goto-prefix-command (kbd "y") 'lsp-goto-type-definition)
-(define-key 'helix-goto-prefix-command (kbd "i") 'lsp-implementation)
-(define-key 'helix-goto-prefix-command (kbd "d") 'lsp-find-definition)
-(define-key 'helix-goto-prefix-command (kbd "r") 'lsp-find-references)
+
+(define-key 'helix-goto-prefix-command (kbd "y") 'xref-find-definitions)
+(define-key 'helix-goto-prefix-command (kbd "i") 'xref-find-definitions)
+(define-key 'helix-goto-prefix-command (kbd "d") 'xref-find-definitions)
+(define-key 'helix-goto-prefix-command (kbd "r") 'xref-find-references)
 ;; (helix-define-key (list 'normal 'visual) 'global (kbd "g") 'helix-goto-prefix-command)
 
 (define-key helix-normal-state-keymap (kbd "g") 'helix-goto-prefix-command)
