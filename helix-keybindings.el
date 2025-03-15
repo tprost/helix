@@ -101,7 +101,7 @@
 (define-key 'helix-match-prefix-command (kbd "a") 'er/mark-outside-pairs)
 (define-key 'helix-match-prefix-command (kbd "i") 'er/mark-inside-pairs)
 
-(define-prefix-commnd 'helix-goto-prefix-commnd)
+(define-prefix-command 'helix-goto-prefix-command)
 (define-key 'helix-goto-prefix-command (kbd "g") 'beginning-of-buffer)
 (define-key 'helix-goto-prefix-command (kbd "e") 'end-of-buffer)
 (define-key 'helix-goto-prefix-command (kbd "s") 'beginning-of-line-text)
