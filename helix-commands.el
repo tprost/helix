@@ -245,5 +245,22 @@
 ;;       (backward-sexp 1))
 ;;      (t
 ;;       (message "Not on a bracket character.")))))
+  
+(defun helix-paste ()
+  "Paste intelligently like Helix: if the last killed text includes a newline,
+insert it on a new line; otherwise, yank at point."
+  (interactive)
+  (if (and kill-ring
+           (string-match-p "\n" (current-kill 0)))
+      (progn
+        ;; If not at beginning of line or buffer, insert a new line
+        (unless (bolp)
+          (newline))
+        (yank)
+        ;; After yanking, ensure point is at beginning of the next line
+        (unless (eolp)
+          (newline)))
+    ;; Otherwise, just yank normally
+    (yank)))
 
 (provide 'helix-commands)

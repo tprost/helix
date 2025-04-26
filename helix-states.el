@@ -32,4 +32,9 @@
   :lighter " [V]"
   :face helix-view-cursor)
 
+(helix-define-state emacs
+  "Helix EMACS state minor mode for states that should have no extra bindings."
+  :lighter " [V]"
+  :face helix-view-cursor)
+
 (provide 'helix-states)

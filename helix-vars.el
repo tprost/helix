@@ -296,6 +296,7 @@ This option will affect the color of position hint and fake region cursor."
     (ediff-mode . motion)
     (gud-mode . normal)
     (haskell-interactive-mode . normal)
+    (custom-mode . view)
     (help-mode . view)
     (helpful-mode . view)
     (json-mode . normal)
@@ -310,6 +311,8 @@ This option will affect the color of position hint and fake region cursor."
     (term-mode . normal)
     (text-mode . normal)
     (vterm-mode . emacs)
+    (magit-mode . emacs)
+    (dired-mode . view)
     (Custom-mode . normal))
   "A list of rules, each is (major-mode . init-state).
 

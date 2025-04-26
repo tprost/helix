@@ -60,7 +60,7 @@
 
 
 (define-key helix-normal-state-keymap (kbd "d") 'helix-delete-region-or-char)
-(define-key helix-normal-state-keymap (kbd "p") 'yank)
+(define-key helix-normal-state-keymap (kbd "p") 'helix-paste)
 (define-key helix-normal-state-keymap (kbd "y") 'helix-kill-ring-save)
 (define-key helix-normal-state-keymap (kbd "u") 'undo)
 (define-key helix-normal-state-keymap (kbd "U") 'redo)
@@ -123,7 +123,13 @@
 (define-key 'helix-leader-prefix-command (kbd "g") 'magit)
 
 (define-key helix-normal-state-keymap (kbd "SPC") 'helix-leader-prefix-command)
-            
+(define-key helix-view-state-keymap (kbd "SPC") 'helix-leader-prefix-command)
+
+(define-prefix-command 'helix-command-prefix-command)
+(define-key 'helix-command-prefix-command (kbd "w") 'save-buffer)
+
+(define-key helix-normal-state-keymap (kbd ":") 'helix-command-prefix-command)
+
 ;; (helix-define-key 'normal 'global (kbd "mm") 'helix-match-brackets)
 
 ;; (helix-set-leader '(normal visual) (kbd "SPC"))
